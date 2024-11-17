@@ -1,0 +1,85 @@
+.contact-form-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border: 3px solid #ffcb05; /* Borde amarillo de Pokémon */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título del formulario con fuente inspirada en Pokémon */
+.contact-form-container h2 {
+    color: #ff0000; /* Rojo Pokémon */
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* Estilo de los inputs y textarea */
+.contact-form-container input,
+.contact-form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 12px;
+    border: 2px solid #ffcb05; /* Borde amarillo */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo de los labels */
+.contact-form-container label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Mensajes de error */
+.contact-form-container .error {
+    color: #ff0000; /* Rojo para errores */
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Botón de envío con efecto Pokémon */
+.contact-form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcb05; /* Amarillo Pokémon */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form-container button:hover {
+    background-color: #ff0000; /* Rojo Pokémon al hacer hover */
+}
+
+/* Estilo de los mensajes de error */
+.error {
+    color: #ff0000; /* Rojo para los mensajes de error */
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
+
+/* Estilos de medios (responsive) */
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 15px;
+    }
+}
