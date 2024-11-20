@@ -6,7 +6,7 @@ const LayoutPublic = () => {
         <div>
             <Navbar/>
             <Outlet />
-            <footer>Footer</footer>
+            <footer className="navbar navbar-expand-lg bg-danger">Footer</footer>
         </div>
     )
 }

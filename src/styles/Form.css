@@ -1,85 +1,125 @@
-.contact-form-container {
+/* Estilos generales para todo el formulario */
+.contact-form-container, .auth-form-container {
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff; /* Fondo blanco */
-    border: 3px solid #ffcb05; /* Borde amarillo de Pokémon */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #fff; /* Fondo blanco para integrarse bien con el fondo de la página */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #e1e1e1; /* Borde suave para un look más profesional */
+}
+
+/* Fondo general de la página */
+body {
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Texto oscuro para facilitar la lectura */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Títulos */
+h1 {
     text-align: center;
-}
-
-/* Título del formulario con fuente inspirada en Pokémon */
-.contact-form-container h2 {
-    color: #ff0000; /* Rojo Pokémon */
-    font-family: 'Arial', sans-serif;
-    font-size: 30px;
+    font-size: 3rem;
+    margin-bottom: 1.8rem;
+    color: #FFDD00;  /* Amarillo brillante, como el color principal de Pokémon */
+    font-weight: 1000;
+    font-family: 'Pokemon Solid', sans-serif;  /* Tipografía temática */
+    letter-spacing: 10px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    text-shadow: 4px 4px 0 #0061ff, -4px -4px 0 #0061ff, 2px -2px 0 #0061ff, -2px 2px 0 #0061ff;
 }
 
-/* Estilo de los inputs y textarea */
-.contact-form-container input,
-.contact-form-container textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0 12px;
-    border: 2px solid #ffcb05; /* Borde amarillo */
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: #ffffff;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Estilo de los labels */
-.contact-form-container label {
-    font-size: 16px;
-    color: #333;
+/* Estilo para las etiquetas de los campos del formulario */
+label {
+    font-size: 1rem;
+    color: #333; /* Color oscuro y suave para el texto */
     font-weight: bold;
+    margin-bottom: 0.5rem;
     display: block;
-    margin-top: 10px;
 }
 
-/* Mensajes de error */
-.contact-form-container .error {
-    color: #ff0000; /* Rojo para errores */
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
-
-/* Botón de envío con efecto Pokémon */
-.contact-form-container button {
+/* Estilo para los campos de entrada (input, textarea) */
+input, textarea {
     width: 100%;
-    padding: 12px;
-    background-color: #ffcb05; /* Amarillo Pokémon */
-    color: #ffffff;
+    padding: 0.8rem;
+    margin: 0.8rem 0;
+    border: 1px solid #ccc; /* Borde gris claro para los campos */
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9; /* Fondo gris claro */
+    box-sizing: border-box;
+}
+
+/* Cambio de color en los campos de entrada al enfocarlos */
+input:focus, textarea:focus {
+    border-color: #ff4d4d; /* Un rojo suave para resaltar el campo en foco */
+    outline: none;
+}
+
+/* Estilo para el mensaje de error */
+.error {
+    color: #ff4d4d; /* Rojo más suave para los mensajes de error */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilo para los botones */
+button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #009bff; /* Rojo suave para los botones */
+    color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    font-size: 1.1rem;
     font-weight: bold;
-    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1rem;
     transition: background-color 0.3s ease;
 }
 
-.contact-form-container button:hover {
-    background-color: #ff0000; /* Rojo Pokémon al hacer hover */
+/* Efecto hover para los botones */
+button:hover {
+    background-color: #e03e3e; /* Rojo más oscuro al pasar el ratón */
 }
 
-/* Estilo de los mensajes de error */
-.error {
-    color: #ff0000; /* Rojo para los mensajes de error */
-    font-size: 12px;
-    margin-top: -8px;
-    margin-bottom: 10px;
+/* Estilos para los enlaces */
+a {
+    color: #ff4d4d; /* Rojo para los enlaces */
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* Estilos de medios (responsive) */
-@media (max-width: 768px) {
-    .contact-form-container {
-        padding: 15px;
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los botones sociales (por ejemplo, Google) */
+.social-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4285F4; /* Color azul de Google */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.social-button:hover {
+    background-color: #357AE8; /* Color azul de Google cuando el usuario pasa el ratón */
+}
+
+/* Estilo para mobile */
+@media (max-width: 480px) {
+    .contact-form-container, .auth-form-container {
+        width: 90%;
+        padding: 1rem;
     }
 }
