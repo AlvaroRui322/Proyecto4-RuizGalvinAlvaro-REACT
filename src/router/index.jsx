@@ -7,6 +7,7 @@ import Userprofile from "../pages/Userprofile.jsx";
 import Myteams from "../pages/Myteams.jsx";
 import Favorites from "../pages/Favorites.jsx";
 import Contact from "../pages/Contact.jsx";
+import Login from "../pages/Login.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -25,7 +26,11 @@ export const router = createBrowserRouter([
 
             },
             {
-                path: "contact",
+                path: "/login",
+                element: <Login/>,
+            },
+            {
+                path: "/contact",
                 element: <Contact/>
             },
             {
