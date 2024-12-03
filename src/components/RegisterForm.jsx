@@ -1,56 +1,33 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { TextField, Button } from "@mui/material";
-import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../config/firebase";
-import { UserContext } from "../context/UserContext";
 import Swal from "sweetalert2";
 import "../styles/Form.css";
 
-/**
- * Componente que representa el formulario de registro de usuarios.
- * Incluye validación de campos y manejo de la autenticación.
- */
 const RegisterForm = () => {
-    const { user, setUser } = useContext(UserContext); // Accede al contexto del usuario
-    const navigate = useNavigate(); // Hook para la navegación entre rutas
+    const navigate = useNavigate();
 
-    /**
-     * Efecto que redirige a la página de perfil si el usuario ya está autenticado.
-     */
-    useEffect(() => {
-        if (user) navigate("/profile");
-    }, [user, navigate]);
+    const initialValues = { email: "", password: "" };
 
-
-    const initialValues = { email: "test@test.com", password: "123456" };
-
-    /**
-     * Esquema de validación para los campos del formulario.
-     * Valida que el correo sea correcto y que la contraseña tenga al menos 6 caracteres.
-     */
+    // Esquema de validación con Yup
     const validationSchema = Yup.object({
-        email: Yup.string().email("Correo no válido").required("El correo es obligatorio."),
+        email: Yup.string()
+            .email("Correo no válido")
+            .required("El correo es obligatorio."),
         password: Yup.string()
             .min(6, "La contraseña debe tener al menos 6 caracteres.")
             .required("La contraseña es obligatoria."),
     });
 
-    /**
-     * Maneja el envío del formulario de registro.
-     *
-     * @param values - Valores ingresados en el formulario (correo y contraseña).
-     * @param formikHelpers - Proporciona funciones auxiliares, como setSubmitting y resetForm.
-     *
-     */
+    // Función para manejar el envío del formulario
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         try {
             const userCredential = await register(values);
-            setUser(userCredential.user);
-            Swal.fire("Registrado con éxito!", "¡Bienvenido!", "success");
-            navigate("/profile");
-            resetForm();
+            Swal.fire("¡Registro exitoso!", "Bienvenido a Pokémon Team Builder", "success");
+            resetForm();  // Limpia el formulario
+            navigate("/profile");  // Redirige a la página de perfil después del registro
         } catch (error) {
             Swal.fire("Error al registrar", error.message, "error");
         }
@@ -58,30 +35,53 @@ const RegisterForm = () => {
     };
 
     return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+        >
             {({ isSubmitting }) => (
                 <Form className="auth-form-container">
                     <h1>Regístrate</h1>
 
-                    {/* Campo para el correo electrónico */}
+                    {/* Campo de correo electrónico */}
                     <Field name="email">
                         {({ field }) => (
-                            <TextField {...field} label="Email" variant="outlined" fullWidth margin="normal" />
+                            <TextField
+                                {...field}
+                                label="Correo electrónico"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
                         )}
                     </Field>
                     <ErrorMessage name="email" component="div" className="error" />
 
-                    {/* Campo para la contraseña */}
+                    {/* Campo de contraseña */}
                     <Field name="password">
                         {({ field }) => (
-                            <TextField {...field} type="password" label="Contraseña" variant="outlined" fullWidth margin="normal" />
+                            <TextField
+                                {...field}
+                                type="password"
+                                label="Contraseña"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
                         )}
                     </Field>
                     <ErrorMessage name="password" component="div" className="error" />
 
                     {/* Botón de registro */}
-                    <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
-                        Registrar
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disabled={isSubmitting}
+                        fullWidth
+                    >
+                        Registrarse
                     </Button>
                 </Form>
             )}

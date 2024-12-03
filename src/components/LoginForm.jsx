@@ -1,38 +1,25 @@
-import { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { TextField, Button } from '@mui/material';
+import { useContext } from 'react';
 import { AuthContext } from '../context/UserContext';
 import Swal from 'sweetalert2';
+import "../styles/Form.css";
 
-/**
- * Esquema de validación para los campos del formulario.
- * Valida el correo electrónico y la contraseña.
- */
 const validationSchema = Yup.object({
-    email: Yup.string().email('Correo inválido').required('Campo requerido'),
-    password: Yup.string().required('Campo requerido'),
+    email: Yup.string().email('Correo inválido').required('El correo es obligatorio.'),
+    password: Yup.string().required('La contraseña es obligatoria.'),
 });
 
-/**
- * Componente que representa el formulario de inicio de sesión.
- * Muestra campos para el correo electrónico y la contraseña, con validación incluida.
- */
 const LoginForm = () => {
-    const { login } = useContext(AuthContext); // Función de inicio de sesión del contexto
+    const { login } = useContext(AuthContext);
 
-    /**
-     * Maneja el envío del formulario.
-     *
-     * @param values - Contiene los valores ingresados en el formulario.
-     * @param FormikHelpers - Proporciona funciones auxiliares como setSubmitting.
-     */
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             await login(values.email, values.password);
             Swal.fire('¡Bienvenido!', 'Inicio de sesión exitoso', 'success');
         } catch (error) {
-            console.error("Error de autenticación:", error);
-            Swal.fire('Error', error.message || 'Credenciales incorrectas', 'error');
+            Swal.fire('Error al iniciar sesión', error.message || 'Credenciales incorrectas', 'error');
         }
         setSubmitting(false);
     };
@@ -44,19 +31,45 @@ const LoginForm = () => {
             onSubmit={handleSubmit}
         >
             {({ isSubmitting }) => (
-                <Form>
-                    {/* Campo para el correo electrónico */}
-                    <Field type="email" name="email" placeholder="Correo electrónico" />
-                    <ErrorMessage name="email" component="div" />
+                <Form className="auth-form-container">
+                    <h1>Iniciar Sesión</h1>
 
-                    {/* Campo para la contraseña */}
-                    <Field type="password" name="password" placeholder="Contraseña" />
-                    <ErrorMessage name="password" component="div" />
+                    <Field name="email">
+                        {({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Correo electrónico"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="email" component="div" className="error" />
 
-                    {/* Botón de envío */}
-                    <button type="submit" disabled={isSubmitting}>
-                        Iniciar sesión
-                    </button>
+                    <Field name="password">
+                        {({ field }) => (
+                            <TextField
+                                {...field}
+                                type="password"
+                                label="Contraseña"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="password" component="div" className="error" />
+
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disabled={isSubmitting}
+                        fullWidth
+                    >
+                        {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
+                    </Button>
                 </Form>
             )}
         </Formik>
@@ -64,6 +77,8 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
 
 
 

@@ -1,23 +1,16 @@
-import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
 import Swal from 'sweetalert2';
+import "../styles/Form.css";
 
-/**
- * Esquema de validación del formulario de contacto.
- * Valida que los campos de correo, asunto, descripción y términos estén correctamente llenados.
- */
 const validationSchema = Yup.object({
-    email: Yup.string().email('Correo inválido').required('Campo requerido'),
-    subject: Yup.string().required('Campo requerido'),
-    description: Yup.string().required('Campo requerido'),
+    email: Yup.string().email('Correo inválido').required('El correo es obligatorio.'),
+    subject: Yup.string().required('El asunto es obligatorio.'),
+    description: Yup.string().required('La descripción es obligatoria.'),
     terms: Yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones'),
 });
 
-/**
- * Formulario de contacto que permite a los usuarios enviar mensajes.
- * @returns ContactForm - Componente de formulario de contacto.
- */
 const ContactForm = () => {
     return (
         <Formik
@@ -29,23 +22,69 @@ const ContactForm = () => {
             }}
         >
             {({ isSubmitting }) => (
-                <Form>
-                    <Field type="email" name="email" placeholder="Correo electrónico" />
-                    <ErrorMessage name="email" component="div" />
+                <Form className="auth-form-container">
+                    <h1>Contacto</h1>
 
-                    <Field type="text" name="subject" placeholder="Asunto" />
-                    <ErrorMessage name="subject" component="div" />
+                    <Field name="email">
+                        {({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Correo electrónico"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="email" component="div" className="error" />
 
-                    <Field as="textarea" name="description" placeholder="Descripción" />
-                    <ErrorMessage name="description" component="div" />
+                    <Field name="subject">
+                        {({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Asunto"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="subject" component="div" className="error" />
 
-                    <Field type="checkbox" name="terms" />
-                    <label htmlFor="terms">Aceptar términos y condiciones</label>
-                    <ErrorMessage name="terms" component="div" />
+                    <Field name="description">
+                        {({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Descripción"
+                                variant="outlined"
+                                multiline
+                                rows={4}
+                                fullWidth
+                                margin="normal"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="description" component="div" className="error" />
 
-                    <button type="submit" disabled={isSubmitting}>
-                        Enviar
-                    </button>
+                    <Field name="terms" type="checkbox">
+                        {({ field }) => (
+                            <FormControlLabel
+                                control={<Checkbox {...field} />}
+                                label="Aceptar términos y condiciones"
+                            />
+                        )}
+                    </Field>
+                    <ErrorMessage name="terms" component="div" className="error" />
+
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        disabled={isSubmitting}
+                        fullWidth
+                    >
+                        {isSubmitting ? 'Enviando...' : 'Enviar'}
+                    </Button>
                 </Form>
             )}
         </Formik>
@@ -53,6 +92,9 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+
+
 
 
 

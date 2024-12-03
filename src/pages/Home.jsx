@@ -27,13 +27,13 @@ const Home = () => {
         try {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150`);
             const data = await response.json();
-            console.log("Datos generales de Pokémon:", data);  // Log de datos generales
+            console.log("Datos generales de Pokémon:", data);
 
             const detailedPokemons = await Promise.all(
                 data.results.map(async (pokemon) => {
                     const detailResponse = await fetch(pokemon.url);
                     const detailData = await detailResponse.json();
-                    console.log(`Detalles de ${pokemon.name}:`, detailData);  // Log de detalles individuales
+                    console.log(`Detalles de ${pokemon.name}:`, detailData);
                     return detailData;
                 })
             );
@@ -66,7 +66,7 @@ const Home = () => {
             const matchesWeight = filters.minWeight === "" || pokemon.weight >= parseInt(filters.minWeight);
             return matchesName && matchesType && matchesWeight;
         });
-        console.log("Pokémon filtrados:", filtered);  // Log de los resultados filtrados
+        console.log("Pokémon filtrados:", filtered);
         setFilteredPokemons(filtered);
         setCurrentPage(1);
     };
